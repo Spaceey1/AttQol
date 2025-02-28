@@ -22,7 +22,7 @@ namespace Atthacc
             [HarmonyPatch("Update")]
             public static void Postfix()
             {
-                if (SteamVR_Input.GetBooleanAction("Teleport").GetStateDown(SteamVR_Input_Sources.Any) && playerController.IsGrounded && Attqol.instance.isJumpActive)
+                if (SteamVR_Input.GetBooleanAction("Teleport").GetStateDown(SteamVR_Input_Sources.Any) && playerController.IsGrounded && Attqol.instance.configIsJumpActive.Value)
                 {
                     Attqol.instance.logger.LogInfo("Jump");
                     playerController.ApplyMovement(new Vector3(0,0.25f,0), true);

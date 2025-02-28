@@ -6,12 +6,10 @@ namespace Atthacc
     public class ToggleMenu : QuickAccessMenuAction
     {
         public override bool IsValid => true;
-
-        public override bool IsActive => Attqol.instance.isJumpActive;
+        public override bool IsActive => true;
         public override void Run(Controller controller)
         {
-            
-            Attqol.instance.isJumpActive = !Attqol.instance.isJumpActive;
+            Attqol.instance.configIsJumpActive.Value = !Attqol.instance.configIsJumpActive.Value;
         }
     }
     [HarmonyPatch(typeof(QuickAccessMenuController))]
