@@ -3,7 +3,7 @@ using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;
-namespace Atthacc
+namespace Attqol
 {
     [BepInPlugin(pluginGuid, pluginName, pluginVersion)]
     public class Attqol : BaseUnityPlugin

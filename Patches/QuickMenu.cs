@@ -1,7 +1,7 @@
 using Alta.QuickAccessActions;
 using UnityEngine;
 using HarmonyLib;
-namespace Atthacc
+namespace Attqol
 {
     public class ToggleMenu : QuickAccessMenuAction
     {
