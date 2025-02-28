@@ -1,6 +1,6 @@
 # A township tale mod that aims to add a couple qol fixes/features
 ## How to install
-1. Download and install the mono version of [BepInEx](https://github.com/BepInEx/BepInEx) to your att install
+1. Download and install the 64 bit version of [BepInEx 5](https://github.com/BepInEx/BepInEx) to your att install
 2. Run the game once to generate the necessary files and directories
 3. Put the mod .dll file into BepInEx/Plugins folder inside your game directory
 ## Building from source
