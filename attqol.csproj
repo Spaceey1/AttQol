@@ -1,0 +1,26 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>library</OutputType>
+    <TargetFramework>net472</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <LangVersion>10.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GameDirectory>/home/space/Games/att/drive_c/Games/Alta/A Township Tale</GameDirectory>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Libraries/0Harmony.dll" />
+    <Reference Include="Libraries/BepInEx.dll"/>
+    <Reference Include="$(GameDirectory)/A Township Tale_Data/Managed/UnityEngine.dll" />
+    <Reference Include="$(GameDirectory)/A Township Tale_Data/Managed/UnityEngine.CoreModule.dll" />
+    <Reference Include="$(GameDirectory)/A Township Tale_Data/Managed/Root.Township.dll" />
+    <Reference Include="$(GameDirectory)/A Township Tale_Data/Managed/Unity.InputSystem.dll" />
+    <Reference Include="$(GameDirectory)/A Township Tale_Data/Managed/Oculus.VR.dll" />
+    <Reference Include="$(GameDirectory)/A Township Tale_Data/Managed/SteamVR.dll" />
+  </ItemGroup>
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Copy SourceFiles="$(OutputPath)attqol.dll"
+      DestinationFolder="$(GameDirectory)/BepInEx/Plugins" />
+  </Target>
+</Project>
