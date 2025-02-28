@@ -22,7 +22,10 @@ namespace Attqol
             [HarmonyPatch("Awake")]
             public static void Postfix(SmoothLocomotion __instance)
             {
-                playerController = __instance;
+                if (playerController == null)
+                {
+                    playerController = __instance;
+                }
             }
         }
         [HarmonyPatch(typeof(Teleporter))]
