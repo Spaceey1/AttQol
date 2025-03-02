@@ -10,4 +10,5 @@
 4. The mod dll should go into your game's ``Plugins`` folder but if it didn't it should also be present in bin/Debug/net472
 ## Current features
 - Jump under teleport button (to be changed), can be toggled in the quick access menu
+- Tank controls (turning and moving with the same hand), toggleable in config off by default
 - More to come
