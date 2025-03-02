@@ -8,14 +8,11 @@ namespace Attqol
 {
     public class LocomotionController
     {
-        //public static SmoothLocomotion LocalPlayer.instance.PlayerCharacter.SmoothLocomotion = null;
         public static PlayerLocomotor playerLocomotor = null;
         public static void Jump()
         {
-            Attqol.instance.logger.LogInfo("Jump");
             if (LocalPlayer.instance.PlayerCharacter.SmoothLocomotion.IsGrounded && Attqol.instance.configIsJumpActive.Value)
             {
-                Attqol.instance.logger.LogInfo("Jump start");
                 LocalPlayer.instance.PlayerCharacter.SmoothLocomotion.ApplyMovement(new Vector3(0, 0.25f, 0), true);
                 LocalPlayer.instance.PlayerCharacter.SmoothLocomotion.velocity.y = 4.5f;
             }
@@ -23,13 +20,6 @@ namespace Attqol
         [HarmonyPatch(typeof(SmoothLocomotion))]
         static class SmoothLocomotionPatches
         {
-            [HarmonyPatch("Awake")]
-            public static void Postfix(SmoothLocomotion __instance)
-            {
-                //if (LocalPlayer.instance.PlayerCharacter.SmoothLocomotion == null)
-                //    LocalPlayer.instance.PlayerCharacter.SmoothLocomotion = __instance;
-            }
-
             [HarmonyPatch("CheckInput")]
             [HarmonyPrefix]
             public static bool PreFix()
@@ -78,6 +68,5 @@ namespace Attqol
 
             }
         }
-
     }
 }
