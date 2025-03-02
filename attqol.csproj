@@ -18,6 +18,8 @@
     <Reference Include="$(GameDirectory)/A Township Tale_Data/Managed/Unity.InputSystem.dll" />
     <Reference Include="$(GameDirectory)/A Township Tale_Data/Managed/Oculus.VR.dll" />
     <Reference Include="$(GameDirectory)/A Township Tale_Data/Managed/SteamVR.dll" />
+    <Reference Include="$(GameDirectory)/A Township Tale_Data/Managed/UnityEngine.PhysicsModule.dll" />
+    <Reference Include="$(GameDirectory)/A Township Tale_Data/Managed/Oculus.Interaction.dll" />
   </ItemGroup>
   <Target Name="PostBuild" AfterTargets="PostBuildEvent">
     <Copy SourceFiles="$(OutputPath)attqol.dll"
