@@ -23,12 +23,12 @@ namespace Attqol
             public static bool PreFix()
             {
                 Vector2 stickDirection = LocalPlayer.instance.PlayerCharacter.SmoothLocomotion.ActiveHand.Controller.PlayerInput.RawInput.SmoothLocomotion;
-                if (Attqol.instance.configIsTankControlsActive.Value && Math.Abs(stickDirection.x) > 0.5)
+                float rotateMagnitude = Math.Abs(stickDirection.x);
+                if (Attqol.instance.configIsTankControlsActive.Value && rotateMagnitude > 0.4)
                 {
                     LocalPlayer.instance.PlayerCharacter.transform.Rotate(new Vector3(0, stickDirection.x * Attqol.instance.configTankTurnSensitivity.Value, 0));
-                    return false;
                 }
-                return true;
+                return rotateMagnitude < 0.9;
             }
         }
 
