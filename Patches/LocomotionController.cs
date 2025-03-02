@@ -1,9 +1,7 @@
-using System.Drawing.Text;
 using HarmonyLib;
 using Oculus.Interaction.Locomotion;
 using UnityEngine;
 using Valve.VR;
-using Valve.VR.InteractionSystem;
 namespace Attqol
 {
     public class LocomotionController

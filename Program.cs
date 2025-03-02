@@ -1,5 +1,4 @@
-﻿// See https://aka.ms/new-console-template for more information
-using BepInEx;
+﻿using BepInEx;
 using BepInEx.Configuration;
 using BepInEx.Logging;
 using HarmonyLib;

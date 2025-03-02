@@ -1,6 +1,4 @@
-using System.Reflection;
 using HarmonyLib;
-using Alta.Networking.Scripts.Player;
 namespace Attqol
 {
     class LocalPlayer
