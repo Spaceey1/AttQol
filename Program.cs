@@ -10,6 +10,8 @@ namespace Attqol
         public static Attqol instance = null;
         public ManualLogSource logger = null;
         public ConfigEntry<bool> configIsJumpActive;
+        public ConfigEntry<bool> configJumpLeftHand;
+        public ConfigEntry<bool> configJumpRightHand;
         public ConfigEntry<bool> configIsTankControlsActive;
         public ConfigEntry<float> configTankTurnSensitivity;
         public const string pluginGuid = "space.att.attqol";
@@ -22,6 +24,8 @@ namespace Attqol
         public void Awake()
         {
             configIsJumpActive = Config.Bind("Jump", "IsJumpActive", false, "Is jump active");
+            configJumpLeftHand = Config.Bind("Jump", "JumpLeftHand", false, "Jump with left hand");
+            configJumpRightHand = Config.Bind("Jump", "JumpRightHand", true, "Jump with right hand");
             configIsTankControlsActive = Config.Bind("Tank controls", "IsTankControlsActive", false, "Is tank controls active");
             configTankTurnSensitivity = Config.Bind("Tank controls", "TankTurnSensitivity", 1f, "Tank turn sensitivity");
             Harmony harmony = new Harmony(pluginGuid);
