@@ -38,7 +38,10 @@ namespace Attqol
             [HarmonyPatch("StartShowPointer")]
             public static bool Prefix(Teleporter __instance)
             {
-                return !Attqol.instance.configIsJumpActive.Value || LocalPlayer.instance.PlayerCharacter.SmoothLocomotion.LeftHand.Teleporter == __instance;
+                return 
+                !Attqol.instance.configIsJumpActive.Value || 
+                (LocalPlayer.instance.PlayerCharacter.SmoothLocomotion.LeftHand.Teleporter == __instance && !Attqol.instance.configJumpLeftHand.Value) ||
+                (LocalPlayer.instance.PlayerCharacter.SmoothLocomotion.RightHand.Teleporter == __instance && !Attqol.instance.configJumpRightHand.Value);
             }
         }
         [HarmonyPatch(typeof(PlayerLocomotor))]
