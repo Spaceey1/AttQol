@@ -59,26 +59,18 @@ namespace Attqol
             [HarmonyPatch("Update")]
             public static void Postfix()
             {
-                SteamVR_Input_Sources jumpInputSource = (SteamVR_Input_Sources)(-1);
-                if(Attqol.instance.configJumpLeftHand.Value && Attqol.instance.configJumpRightHand.Value)
-                {
-                    jumpInputSource = SteamVR_Input_Sources.Any;
-                }
-                else if(Attqol.instance.configJumpLeftHand.Value)
-                {
-                    jumpInputSource = SteamVR_Input_Sources.LeftHand;
-                }
-                else if(Attqol.instance.configJumpRightHand.Value)
-                {
-                    jumpInputSource = SteamVR_Input_Sources.RightHand;
-                }
-                else{
+                SteamVR_Input_Sources jumpInputSource;
+                var configInput = (Attqol.instance.configJumpLeftHand.Value, Attqol.instance.configJumpRightHand.Value);
+                if(configInput == (false, false))
                     return;
-                }
-                if (Attqol.instance.configIsJumpActive.Value && SteamVR_Input.GetBooleanAction("Teleport").GetStateDown(jumpInputSource))
+                jumpInputSource = configInput switch
                 {
+                    (true, true) => SteamVR_Input_Sources.Any,
+                    (true, false) => SteamVR_Input_Sources.LeftHand,
+                    (false, true) => SteamVR_Input_Sources.RightHand,
+                };
+                if (Attqol.instance.configIsJumpActive.Value && SteamVR_Input.GetBooleanAction("Teleport").GetStateDown(jumpInputSource))
                     Jump();
-                }
             }
         }
     }
