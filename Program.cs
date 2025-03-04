@@ -8,7 +8,7 @@ namespace Attqol
     public class Attqol : BaseUnityPlugin
     {
         public static Attqol instance = null;
-        public ManualLogSource logger = null;
+        public static ManualLogSource logger = null;
         public ConfigEntry<bool> configIsJumpActive;
         public ConfigEntry<bool> configJumpLeftHand;
         public ConfigEntry<bool> configJumpRightHand;
