@@ -5,7 +5,10 @@ namespace Attqol
 {
     public class LocomotionController
     {
-        public static SmoothLocomotion activeLocomotion = (PlayerController.Current as SmoothLocomotionPlayerController).SmoothLocomotion;
+        public static SmoothLocomotion activeLocomotion
+        {
+            get => (PlayerController.Current as SmoothLocomotionPlayerController)?.SmoothLocomotion;
+        }
         public static void Jump()
         {
             if (activeLocomotion.IsGrounded && Attqol.instance.configIsJumpActive.Value)
@@ -21,6 +24,8 @@ namespace Attqol
             [HarmonyPrefix]
             public static bool Prefix()
             {
+                if (!Attqol.instance.configIsTankControlsActive.Value)
+                    return true;
                 try
                 {
                     Vector2 stickDirection = activeLocomotion.ActiveHand.Controller.PlayerInput.RawInput.SmoothLocomotion;
@@ -51,25 +56,25 @@ namespace Attqol
             }
         }
 
-                [HarmonyPatch(typeof(UnityUpdateManager))]
-                static class UnityUpdateManagerPatches
+        [HarmonyPatch(typeof(UnityUpdateManager))]
+        static class UnityUpdateManagerPatches
+        {
+            [HarmonyPatch("Update")]
+            public static void Postfix()
+            {
+                SteamVR_Input_Sources jumpInputSource;
+                var configInput = (Attqol.instance.configJumpLeftHand.Value, Attqol.instance.configJumpRightHand.Value);
+                if (configInput == (false, false))
+                    return;
+                jumpInputSource = configInput switch
                 {
-                    [HarmonyPatch("Update")]
-                    public static void Postfix()
-                    {
-                        SteamVR_Input_Sources jumpInputSource;
-                        var configInput = (Attqol.instance.configJumpLeftHand.Value, Attqol.instance.configJumpRightHand.Value);
-                        if (configInput == (false, false))
-                            return;
-                        jumpInputSource = configInput switch
-                        {
-                            (true, true) => SteamVR_Input_Sources.Any,
-                            (true, false) => SteamVR_Input_Sources.LeftHand,
-                            (false, true) => SteamVR_Input_Sources.RightHand,
-                        };
-                        if (Attqol.instance.configIsJumpActive.Value && SteamVR_Input.GetBooleanAction("Teleport").GetStateDown(jumpInputSource))
-                            Jump();
-                    }
-                }
+                    (true, true) => SteamVR_Input_Sources.Any,
+                    (true, false) => SteamVR_Input_Sources.LeftHand,
+                    (false, true) => SteamVR_Input_Sources.RightHand,
+                };
+                if (Attqol.instance.configIsJumpActive.Value && SteamVR_Input.GetBooleanAction("Teleport").GetStateDown(jumpInputSource))
+                    Jump();
+            }
+        }
     }
 }
