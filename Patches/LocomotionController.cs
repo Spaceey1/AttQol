@@ -26,20 +26,10 @@ namespace Attqol
             {
                 if (!Attqol.instance.configIsTankControlsActive.Value)
                     return true;
-                try
-                {
-                    Vector2 stickDirection = activeLocomotion.ActiveHand.Controller.PlayerInput.RawInput.SmoothLocomotion;
-                    float rotateMagnitude = Math.Abs(stickDirection.x);
-                    if (Attqol.instance.configIsTankControlsActive.Value && rotateMagnitude > 0.4)
-                    {
-                        PlayerController.Current.transform.Rotate(new Vector3(0, stickDirection.x * Attqol.instance.configTankTurnSensitivity.Value, 0));
-                    }
-                    return rotateMagnitude < 0.9;
-                }
-                catch
-                {
-                    return true;
-                }
+
+                Vector2 stickDirection = activeLocomotion.ActiveHand.Controller.PlayerInput.RawInput.SmoothLocomotion;
+                float rotateMagnitude = Math.Abs(stickDirection.x);
+                return rotateMagnitude < 0.9;
             }
         }
 
@@ -60,7 +50,8 @@ namespace Attqol
         static class UnityUpdateManagerPatches
         {
             [HarmonyPatch("Update")]
-            public static void Postfix()
+            [HarmonyPostfix]
+            public static void Update()
             {
                 SteamVR_Input_Sources jumpInputSource;
                 var configInput = (Attqol.instance.configJumpLeftHand.Value, Attqol.instance.configJumpRightHand.Value);
@@ -74,6 +65,17 @@ namespace Attqol
                 };
                 if (Attqol.instance.configIsJumpActive.Value && SteamVR_Input.GetBooleanAction("Teleport").GetStateDown(jumpInputSource))
                     Jump();
+            }
+            [HarmonyPatch("FixedUpdate")]
+            [HarmonyPostfix]
+            public static void FixedUpdate()
+            {
+                Vector2 stickDirection = activeLocomotion.ActiveHand.Controller.PlayerInput.RawInput.SmoothLocomotion;
+                float rotateMagnitude = Math.Abs(stickDirection.x);
+                if (Attqol.instance.configIsTankControlsActive.Value && rotateMagnitude > 0.4)
+                {
+                    PlayerController.Current.transform.Rotate(new Vector3(0, stickDirection.x * Attqol.instance.configTankTurnSensitivity.Value, 0));
+                }
             }
         }
     }
