@@ -27,7 +27,7 @@ namespace Attqol
                     float rotateMagnitude = Math.Abs(stickDirection.x);
                     if (Attqol.instance.configIsTankControlsActive.Value && rotateMagnitude > 0.4)
                     {
-                        LocalPlayer.instance.transform.Rotate(new Vector3(0, stickDirection.x * Attqol.instance.configTankTurnSensitivity.Value, 0));
+                        PlayerController.Current.transform.Rotate(new Vector3(0, stickDirection.x * Attqol.instance.configTankTurnSensitivity.Value, 0));
                     }
                     return rotateMagnitude < 0.9;
                 }
