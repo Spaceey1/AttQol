@@ -16,7 +16,7 @@ namespace Attqol
         public ConfigEntry<float> configTankTurnSensitivity;
         public const string pluginGuid = "space.att.attqol";
         public const string pluginName = "Attqol";
-        public const string pluginVersion = "0.0.2";
+        public const string pluginVersion = "0.0.3";
         Attqol()
         {
             instance = this;
